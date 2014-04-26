@@ -1,56 +1,61 @@
-//
-//  main.cpp
-//  codejam
-//
-//  Created by cloudzfy on 5/12/13.
-//  Copyright (c) 2013 cloudzfy. All rights reserved.
-//
-
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <algorithm>
-#include <math.h>
-
+#include <stack>
 using namespace std;
 
 int main()
 {
-    int T,X,Y;
-    freopen("B-small-attempt0.in.txt","r",stdin);
-	freopen("B-small-attempt0.out.txt","w",stdout);
-    scanf("%d",&T);
-    for(int t=1;t<=T;t++)
+    int t,T,X,Y;
+    stack<char> s;
+    freopen("B-large-practice.in.txt","r",stdin);
+	freopen("B-large-practice.out.txt","w",stdout);
+    scanf("%d", &T);
+    for(t=1; t<=T; t++)
     {
         scanf("%d%d",&X,&Y);
+        int N=0,sum=0;
+        while(sum<abs(X)+abs(Y)||(sum+X+Y)%2==1)
+        {
+            N+=1;
+            sum+=N;
+        }
+        while(N>0)
+        {
+            if(abs(X)>abs(Y))
+            {
+                if(X>0)
+                {
+                    X-=N;
+                    s.push('E');
+                }
+                else
+                {
+                    X+=N;
+                    s.push('W');
+                }
+            }
+            else
+            {
+                if(Y>0)
+                {
+                    Y-=N;
+                    s.push('N');
+                }
+                else
+                {
+                    Y+=N;
+                    s.push('S');
+                }
+            }
+            N--;
+        }
         printf("Case #%d: ",t);
-        if(X>0)
+        while(!s.empty())
         {
-            for(int i=0;i<abs(X);i++)
-            {
-                printf("WE");
-            }
-        }
-        else if(X<0)
-        {
-            for(int i=0;i<abs(X);i++)
-            {
-                printf("EW");
-            }
-        }
-        if(Y>0)
-        {
-            for(int i=0;i<abs(Y);i++)
-            {
-                printf("SN");
-            }
-        }
-        else if(Y<0)
-        {
-            for(int i=0;i<abs(Y);i++)
-            {
-                printf("NS");
-            }
+            printf("%c",s.top());
+            s.pop();
         }
         printf("\n");
     }
