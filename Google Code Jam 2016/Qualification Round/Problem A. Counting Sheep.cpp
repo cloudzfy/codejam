@@ -1,11 +1,3 @@
-//
-//  main.cpp
-//  codejam
-//
-//  Created by Cloudzfy on 3/11/15.
-//  Copyright (c) 2015 Cloudzfy. All rights reserved.
-//
-
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
